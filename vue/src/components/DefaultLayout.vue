@@ -112,32 +112,50 @@
     </div>
 </template>
 
-<script setup>
+<script>
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
 import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/vue/24/outline'
 import {useStore} from "vuex";
-import {computed} from "vue";
 import {useRouter} from "vue-router";
+import {computed} from "vue";
 
-const user = computed(() => store.state.user.data);
 
 const navigation = [
     {name: 'Dashboard', to: {name: "Dashboard"}},
     {name: 'Surveys', to: {name: "Surveys"}},
 ]
-// const userNavigation = [
-//     {name: 'Your Profile', href: '#'},
-//     {name: 'Settings', href: '#'},
-//     {name: 'Sign out', href: '#'},
-// ]
 
-const store = useStore();
-const router = useRouter();
+export default {
+    components: {
+        Disclosure,
+        DisclosureButton,
+        DisclosurePanel,
+        Menu,
+        MenuButton,
+        MenuItem,
+        MenuItems,
+        BellIcon,
+        Bars3Icon,
+        XMarkIcon,
+        Notification,
+    },
+    setup() {
+        const store = useStore();
+        const router = useRouter();
 
-function logout() {
-    store.commit('logout');
-    router.push({
-        name: 'Login'
-    })
+        function logout() {
+            store.commit('logout');
+            router.push({
+                name: 'Login'
+            })
+        }
+
+        return {
+            user: computed(() => store.state.user.data),
+            navigation,
+            logout,
+        }
+    }
 }
+
 </script>
