@@ -5,6 +5,8 @@
                 <!--                Dashboard-->
                 {{ title }}
             </h1>
+
+            <slot name="header"></slot>
         </div>
     </header>
     <main>

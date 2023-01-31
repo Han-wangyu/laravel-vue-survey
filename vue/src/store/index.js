@@ -6,7 +6,33 @@ const store = createStore({
         user: {
             data: {},
             token: sessionStorage.getItem('TOKEN'),
-        }
+        },
+        surveys: [
+            {
+                id: 1,
+                image: '/vite.svg',
+                title: 'test',
+                description: 'test<br>test'
+            },
+            {
+                id: 2,
+                image: '/vite.svg',
+                title: 'test',
+                description: 'test<br>test'
+            },
+            {
+                id: 3,
+                image: '/vite.svg',
+                title: 'test',
+                description: 'test<br>test'
+            },
+            {
+                id: 4,
+                image: '/vite.svg',
+                title: 'test',
+                description: 'test<br>test'
+            },
+        ]  // TODO
     },
     getters: {},
     actions: {
