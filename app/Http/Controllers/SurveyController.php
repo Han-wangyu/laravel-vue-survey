@@ -13,7 +13,7 @@ class SurveyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -25,11 +25,11 @@ class SurveyController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreSurveyRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return SurveyResource|\Illuminate\Http\Response
      */
     public function store(StoreSurveyRequest $request)
     {
-        $result = Survey::create($request->validate());
+        $result = Survey::create($request->validated());
 
         return new SurveyResource($result);
     }
@@ -38,13 +38,13 @@ class SurveyController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Survey  $survey
-     * @return \Illuminate\Http\Response
+     * @return SurveyResource|\Illuminate\Http\Response
      */
     public function show(Survey $survey, Request $request)
     {
         $user = $request->user();
         if ($user->id !== $survey->user_id) {
-            return abort(403, 'Unauthorized action.');
+            abort(403, 'Unauthorized action.');
         }
         return new SurveyResource($survey);
     }
@@ -54,11 +54,11 @@ class SurveyController extends Controller
      *
      * @param  \App\Http\Requests\UpdateSurveyRequest  $request
      * @param  \App\Models\Survey  $survey
-     * @return \Illuminate\Http\Response
+     * @return SurveyResource|\Illuminate\Http\Response
      */
     public function update(UpdateSurveyRequest $request, Survey $survey)
     {
-        $survey->update($request->validate());
+        $survey->update($request->validated());
         return new SurveyResource($survey);
     }
 
@@ -72,7 +72,7 @@ class SurveyController extends Controller
     {
         $user = $request->user();
         if ($user->id !== $survey->user_id) {
-            return abort(403, 'Unauthorized action.');
+            abort(403, 'Unauthorized action.');
         }
 
         $survey->delete();

@@ -7,9 +7,9 @@
                 </h1>
             </div>
         </template>
-        <!--        <pre>-->
-        <!--            {{ model }}-->
-        <!--        </pre>-->
+<!--                <pre>-->
+<!--                    {{ model }}-->
+<!--                </pre>-->
         <form @submit.prevent="saveSurvey">
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <!-- Survey Field -->
@@ -152,6 +152,7 @@ import {v4 as uuidv4} from "uuid";
 import {ref} from "vue";
 import store from '../store'
 import {useRoute} from "vue-router";
+import router from "../router/index.js";
 
 const route = useRoute();
 
@@ -196,6 +197,16 @@ function questionChange(question) {
         }
         return q;
     });
+}
+
+function saveSurvey() {
+    store.dispatch("saveSurvey", model.value);
+    //     .then(({ data }) => {
+    //     router.push({
+    //         name: "SurveyView",
+    //         params: { id: data.data.id },
+    //     })
+    // })
 }
 </script>
 
